@@ -11,6 +11,9 @@ Prerequisites:
 
 Usage:
   python3 authorize.py [--config-dir ~/.config/google-mcp]
+
+  With Google Ads + Merchant Center scopes:
+  python3 authorize.py --extra-scopes https://www.googleapis.com/auth/adwords https://www.googleapis.com/auth/content
 """
 
 import argparse
@@ -65,7 +68,7 @@ def main():
     print()
 
     flow = InstalledAppFlow.from_client_secrets_file(credentials_file, scopes)
-    creds = flow.run_local_server(port=0)
+    creds = flow.run_local_server(port=0, prompt="consent")
 
     token_data = {
         "token": creds.token,
